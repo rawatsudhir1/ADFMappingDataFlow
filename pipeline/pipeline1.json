@@ -1,0 +1,236 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "URL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Test_URL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Test_ID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Test_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Subtitle",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Subtitle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Icon URL",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Icon_URL",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Average User Rating",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Average_User_Rating",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "User Rating Count",
+									"type": "String"
+								},
+								"sink": {
+									"name": "User_Rating_Count",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Price",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Price",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "In-app Purchases",
+									"type": "String"
+								},
+								"sink": {
+									"name": "In_app_Purches",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Description",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Test_Description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Developer",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Developer",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Age Rating",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Age_Rating",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Languages",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Languages",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Size",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Size",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Primary Genre",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Primary_Genre",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Genres",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Genres",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Original Release Date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Original_Relee_Date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Current Version Release Date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Current_Version_Relee_Date",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

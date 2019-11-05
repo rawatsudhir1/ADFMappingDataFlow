@@ -1,0 +1,90 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Test_URL",
+				"type": "varchar"
+			},
+			{
+				"name": "Test_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Test_Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Subtitle",
+				"type": "varchar"
+			},
+			{
+				"name": "Icon_URL",
+				"type": "varchar"
+			},
+			{
+				"name": "Average_User_Rating",
+				"type": "varchar"
+			},
+			{
+				"name": "User_Rating_Count",
+				"type": "varchar"
+			},
+			{
+				"name": "Price",
+				"type": "varchar"
+			},
+			{
+				"name": "In_app_Purches",
+				"type": "varchar"
+			},
+			{
+				"name": "Test_Description",
+				"type": "varchar"
+			},
+			{
+				"name": "Developer",
+				"type": "varchar"
+			},
+			{
+				"name": "Age_Rating",
+				"type": "varchar"
+			},
+			{
+				"name": "Languages",
+				"type": "varchar"
+			},
+			{
+				"name": "Size",
+				"type": "varchar"
+			},
+			{
+				"name": "Primary_Genre",
+				"type": "varchar"
+			},
+			{
+				"name": "Genres",
+				"type": "varchar"
+			},
+			{
+				"name": "Original_Relee_Date",
+				"type": "varchar"
+			},
+			{
+				"name": "Current_Version_Relee_Date",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "appstore"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

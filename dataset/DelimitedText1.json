@@ -1,0 +1,97 @@
+{
+	"name": "DelimitedText1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "appstore_games.csv",
+				"container": "sampledata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "URL",
+				"type": "String"
+			},
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "Name",
+				"type": "String"
+			},
+			{
+				"name": "Subtitle",
+				"type": "String"
+			},
+			{
+				"name": "Icon URL",
+				"type": "String"
+			},
+			{
+				"name": "Average User Rating",
+				"type": "String"
+			},
+			{
+				"name": "User Rating Count",
+				"type": "String"
+			},
+			{
+				"name": "Price",
+				"type": "String"
+			},
+			{
+				"name": "In-app Purchases",
+				"type": "String"
+			},
+			{
+				"name": "Description",
+				"type": "String"
+			},
+			{
+				"name": "Developer",
+				"type": "String"
+			},
+			{
+				"name": "Age Rating",
+				"type": "String"
+			},
+			{
+				"name": "Languages",
+				"type": "String"
+			},
+			{
+				"name": "Size",
+				"type": "String"
+			},
+			{
+				"name": "Primary Genre",
+				"type": "String"
+			},
+			{
+				"name": "Genres",
+				"type": "String"
+			},
+			{
+				"name": "Original Release Date",
+				"type": "String"
+			},
+			{
+				"name": "Current Version Release Date",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
