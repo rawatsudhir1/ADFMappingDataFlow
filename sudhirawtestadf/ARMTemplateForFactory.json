@@ -1,0 +1,810 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "sudhirawtestadf"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"DataFlowblobstorage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DataFlowblobstorage'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "URL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Test_URL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Test_ID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Test_Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Subtitle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Subtitle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Icon URL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Icon_URL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Average User Rating",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Average_User_Rating",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "User Rating Count",
+											"type": "String"
+										},
+										"sink": {
+											"name": "User_Rating_Count",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Price",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Price",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "In-app Purchases",
+											"type": "String"
+										},
+										"sink": {
+											"name": "In_app_Purches",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Description",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Test_Description",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Developer",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Developer",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Age Rating",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Age_Rating",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Languages",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Languages",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Size",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Size",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Primary Genre",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Primary_Genre",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Genres",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Genres",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Original Release Date",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Original_Relee_Date",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Current Version Release Date",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Current_Version_Relee_Date",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Athlete_Events')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataFlowblobstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "athlete_events.csv",
+						"container": "olympicdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ID",
+						"type": "String"
+					},
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Sex",
+						"type": "String"
+					},
+					{
+						"name": "Age",
+						"type": "String"
+					},
+					{
+						"name": "Height",
+						"type": "String"
+					},
+					{
+						"name": "Weight",
+						"type": "String"
+					},
+					{
+						"name": "Team",
+						"type": "String"
+					},
+					{
+						"name": "NOC",
+						"type": "String"
+					},
+					{
+						"name": "Games",
+						"type": "String"
+					},
+					{
+						"name": "Year",
+						"type": "String"
+					},
+					{
+						"name": "Season",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "Sport",
+						"type": "String"
+					},
+					{
+						"name": "Event",
+						"type": "String"
+					},
+					{
+						"name": "Medal",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataFlowblobstorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Test_URL",
+						"type": "varchar"
+					},
+					{
+						"name": "Test_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "Test_Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Subtitle",
+						"type": "varchar"
+					},
+					{
+						"name": "Icon_URL",
+						"type": "varchar"
+					},
+					{
+						"name": "Average_User_Rating",
+						"type": "varchar"
+					},
+					{
+						"name": "User_Rating_Count",
+						"type": "varchar"
+					},
+					{
+						"name": "Price",
+						"type": "varchar"
+					},
+					{
+						"name": "In_app_Purches",
+						"type": "varchar"
+					},
+					{
+						"name": "Test_Description",
+						"type": "varchar"
+					},
+					{
+						"name": "Developer",
+						"type": "varchar"
+					},
+					{
+						"name": "Age_Rating",
+						"type": "varchar"
+					},
+					{
+						"name": "Languages",
+						"type": "varchar"
+					},
+					{
+						"name": "Size",
+						"type": "varchar"
+					},
+					{
+						"name": "Primary_Genre",
+						"type": "varchar"
+					},
+					{
+						"name": "Genres",
+						"type": "varchar"
+					},
+					{
+						"name": "Original_Relee_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Current_Version_Relee_Date",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "appstore"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BadDataOutput')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataFlowblobstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "adfbaddata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataFlowblobstorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "appstore_games.csv",
+						"container": "sampledata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "URL",
+						"type": "String"
+					},
+					{
+						"name": "ID",
+						"type": "String"
+					},
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Subtitle",
+						"type": "String"
+					},
+					{
+						"name": "Icon URL",
+						"type": "String"
+					},
+					{
+						"name": "Average User Rating",
+						"type": "String"
+					},
+					{
+						"name": "User Rating Count",
+						"type": "String"
+					},
+					{
+						"name": "Price",
+						"type": "String"
+					},
+					{
+						"name": "In-app Purchases",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					},
+					{
+						"name": "Developer",
+						"type": "String"
+					},
+					{
+						"name": "Age Rating",
+						"type": "String"
+					},
+					{
+						"name": "Languages",
+						"type": "String"
+					},
+					{
+						"name": "Size",
+						"type": "String"
+					},
+					{
+						"name": "Primary Genre",
+						"type": "String"
+					},
+					{
+						"name": "Genres",
+						"type": "String"
+					},
+					{
+						"name": "Original Release Date",
+						"type": "String"
+					},
+					{
+						"name": "Current Version Release Date",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GoodDataOutput')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataFlowblobstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "adfgooddata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataFlowblobstorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NOCRegions')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataFlowblobstorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "noc_regions.csv",
+						"container": "olympicdata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "NOC",
+						"type": "String"
+					},
+					{
+						"name": "region",
+						"type": "String"
+					},
+					{
+						"name": "notes",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataFlowblobstorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataFlowblobstorage')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('DataFlowblobstorage_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Athlete_Events",
+								"type": "DatasetReference"
+							},
+							"name": "AthleteDS",
+							"typeProperties": {}
+						},
+						{
+							"dataset": {
+								"referenceName": "NOCRegions",
+								"type": "DatasetReference"
+							},
+							"name": "RegionDS",
+							"typeProperties": {}
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "BadDataOutput",
+								"type": "DatasetReference"
+							},
+							"name": "StoreBadData"
+						},
+						{
+							"dataset": {
+								"referenceName": "GoodDataOutput",
+								"type": "DatasetReference"
+							},
+							"name": "Insights"
+						},
+						{
+							"dataset": {
+								"referenceName": "GoodDataOutput",
+								"type": "DatasetReference"
+							},
+							"name": "Insight2"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SortRegionDS"
+						},
+						{
+							"name": "ConditionalSplit1"
+						},
+						{
+							"name": "SortAthleteDS"
+						},
+						{
+							"name": "JoinDatasets"
+						},
+						{
+							"name": "AggRegionSportMedal"
+						},
+						{
+							"name": "OnlyMedalRecords"
+						},
+						{
+							"name": "AggYearRegionMedal"
+						}
+					],
+					"script": "\n\nsource(output(\n\t\tID as string,\n\t\tName as string,\n\t\tSex as string,\n\t\tAge as string,\n\t\tHeight as string,\n\t\tWeight as string,\n\t\tTeam as string,\n\t\tNOC as string,\n\t\tGames as string,\n\t\tYear as string,\n\t\tSeason as string,\n\t\tCity as string,\n\t\tSport as string,\n\t\tEvent as string,\n\t\tMedal as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> AthleteDS\nsource(output(\n\t\tNOC as string,\n\t\tregion as string,\n\t\tnotes as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> RegionDS\nRegionDS sort(asc(NOC, true)) ~> SortRegionDS\nAthleteDS split(toInteger(Age)>0 && toInteger(Height)>0 && toInteger(Weight)>0,\n\tdisjoint: false) ~> ConditionalSplit1@(GoodData, BadData)\nConditionalSplit1@GoodData sort(asc(NOC, true)) ~> SortAthleteDS\nSortAthleteDS, SortRegionDS join(ConditionalSplit1@GoodData@NOC == RegionDS@NOC,\n\tjoinType:'left',\n\tbroadcast: 'none')~> JoinDatasets\nJoinDatasets aggregate(groupBy(region,\n\t\tSport,\n\t\tMedal),\n\tID = count(ID)) ~> AggRegionSportMedal\nAggRegionSportMedal filter(Medal!='NA') ~> OnlyMedalRecords\nJoinDatasets aggregate(groupBy(Year,\n\t\tregion,\n\t\tMedal),\n\tID = count(ID)) ~> AggYearRegionMedal\nConditionalSplit1@BadData sink(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> StoreBadData\nOnlyMedalRecords sink(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> Insights\nAggYearRegionMedal sink(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> Insight2"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Athlete_Events')]",
+				"[concat(variables('factoryId'), '/datasets/NOCRegions')]",
+				"[concat(variables('factoryId'), '/datasets/BadDataOutput')]",
+				"[concat(variables('factoryId'), '/datasets/GoodDataOutput')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataFlowExecution')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dataflow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"AthleteDS": {},
+									"RegionDS": {},
+									"StoreBadData": {},
+									"Insights": {},
+									"Insight2": {}
+								}
+							},
+							"staging": {}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
+			]
+		}
+	]
+}
