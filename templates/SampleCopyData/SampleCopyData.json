@@ -1,0 +1,452 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name"
+		},
+		"AzureBlobStorage1": {
+			"type": "string"
+		},
+		"AzureSqlDatabase1": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyData')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "URL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Test_URL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Test_ID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Test_Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Subtitle",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Subtitle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Icon URL",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Icon_URL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Average User Rating",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Average_User_Rating",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "User Rating Count",
+											"type": "String"
+										},
+										"sink": {
+											"name": "User_Rating_Count",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Price",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Price",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "In-app Purchases",
+											"type": "String"
+										},
+										"sink": {
+											"name": "In_app_Purches",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Description",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Test_Description",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Developer",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Developer",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Age Rating",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Age_Rating",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Languages",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Languages",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Size",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Size",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Primary Genre",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Primary_Genre",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Genres",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Genres",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Original Release Date",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Original_Relee_Date",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Current Version Release Date",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Current_Version_Relee_Date",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('AzureBlobStorage1')]",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "appstore_games.csv",
+						"container": "sampledata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "URL",
+						"type": "String"
+					},
+					{
+						"name": "ID",
+						"type": "String"
+					},
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Subtitle",
+						"type": "String"
+					},
+					{
+						"name": "Icon URL",
+						"type": "String"
+					},
+					{
+						"name": "Average User Rating",
+						"type": "String"
+					},
+					{
+						"name": "User Rating Count",
+						"type": "String"
+					},
+					{
+						"name": "Price",
+						"type": "String"
+					},
+					{
+						"name": "In-app Purchases",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					},
+					{
+						"name": "Developer",
+						"type": "String"
+					},
+					{
+						"name": "Age Rating",
+						"type": "String"
+					},
+					{
+						"name": "Languages",
+						"type": "String"
+					},
+					{
+						"name": "Size",
+						"type": "String"
+					},
+					{
+						"name": "Primary Genre",
+						"type": "String"
+					},
+					{
+						"name": "Genres",
+						"type": "String"
+					},
+					{
+						"name": "Original Release Date",
+						"type": "String"
+					},
+					{
+						"name": "Current Version Release Date",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('AzureSqlDatabase1')]",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Test_URL",
+						"type": "varchar"
+					},
+					{
+						"name": "Test_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "Test_Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Subtitle",
+						"type": "varchar"
+					},
+					{
+						"name": "Icon_URL",
+						"type": "varchar"
+					},
+					{
+						"name": "Average_User_Rating",
+						"type": "varchar"
+					},
+					{
+						"name": "User_Rating_Count",
+						"type": "varchar"
+					},
+					{
+						"name": "Price",
+						"type": "varchar"
+					},
+					{
+						"name": "In_app_Purches",
+						"type": "varchar"
+					},
+					{
+						"name": "Test_Description",
+						"type": "varchar"
+					},
+					{
+						"name": "Developer",
+						"type": "varchar"
+					},
+					{
+						"name": "Age_Rating",
+						"type": "varchar"
+					},
+					{
+						"name": "Languages",
+						"type": "varchar"
+					},
+					{
+						"name": "Size",
+						"type": "varchar"
+					},
+					{
+						"name": "Primary_Genre",
+						"type": "varchar"
+					},
+					{
+						"name": "Genres",
+						"type": "varchar"
+					},
+					{
+						"name": "Original_Relee_Date",
+						"type": "varchar"
+					},
+					{
+						"name": "Current_Version_Relee_Date",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "appstore"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
