@@ -1,0 +1,23 @@
+{
+	"name": "DataFlowExecution",
+	"description": "This is a Mapping Data Flow sample template.",
+	"image": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 240\" width=\"400px\" height=\"240px\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><g clip-path=\"url(#mainClip83682)\" transform=\"matrix(1, 0, 0, 1, 0, 0)\"><g transform=\"matrix(0.851064, 0, 0, 0.851064, 113.617, 84.2553)\"><g transform=\"matrix(1, 0, 0, 1, 0, 0)\"><g transform=\"matrix(1, 0, 0, 1, 0, 0)\"><g transform=\"matrix(1, 0, 0, 1, 0, 0)\"><g transform=\"matrix(1, 0, 0, 1, 0, 0)\"><g transform=\"matrix(1, 0, 0, 1, 0.8, 0.8)\"><rect fill=\"#f4f4f4\" stroke=\"none\" transform=\"matrix(1, 0, 0, 1, 0, 0)\" x=\"0\" y=\"0\" width=\"192.4\" height=\"82.4\"/><g transform=\"matrix(1, 0, 0, 1, 0, 0)\"><rect fill=\"#dcdcdc\" stroke=\"none\" transform=\"matrix(1, 0, 0, 1, 0, 0)\" x=\"0\" y=\"0\" width=\"192.4\" height=\"25\"/><g clip-path=\"url(#CLIP83683)\" transform=\"matrix(1, 0, 0, 1, 0, 0)\"><text style=\"font: 12px Segoe UI\" fill=\"#515151\" stroke=\"none\" text-anchor=\"start\" transform=\"matrix(1, 0, 0, 1, 5, 6.5)\" x=\"0\" y=\"10.5105\">Mapping Data Flow</text></g><g transform=\"matrix(1, 0, 0, 1, 161, 0)\"><path fill=\"#4a4a4a\" stroke=\"none\" transform=\"matrix(1, 0, 0, 1, 0, 0)\" d=\"M 8.04 16.8 L 8.04 16.8 L 19.2 5.64 L 19.2 9.6 L 20.4 9.6 L 20.4 3.6 L 14.4 3.6 L 14.4 4.8 L 18.36 4.8 L 7.2 15.96 L 8.04 16.8 M 16.8 19.2 L 16.8 19.2 L 4.8 19.2 L 4.8 7.2 L 12 7.2 L 12 6 L 3.6 6 L 3.6 20.4 L 18 20.4 L 18 12 L 16.8 12 L 16.8 19.2\"/></g></g><g transform=\"matrix(1, 0, 0, 1, 0, 25)\"><g transform=\"matrix(1, 0, 0, 1, 10, 13.5)\"><path fill=\"#333333\" stroke=\"none\" transform=\"matrix(1, 0, 0, 1, 0, 0)\" d=\"M 13.491 14.2125 C 13.443 12.9885 11.1195 12 8.25 12 C 5.3805 12 3.057 12.9885 3.009 14.2125 C 3.006 14.208 3.0015 14.205 3 14.2005 L 3 22.038 C 3 23.079 5.8785 24 8.5845 24 C 11.292 24 13.5 23.1195 13.5 22.1175 L 13.5 14.2005 L 13.491 14.2125 Z M 26.991 14.2125 C 26.943 12.9885 24.6195 12 21.75 12 C 18.8805 12 16.557 12.9885 16.509 14.2125 C 16.506 14.208 16.5015 14.205 16.5 14.2005 L 16.5 22.038 C 16.5 23.079 19.3785 24 22.0845 24 C 24.792 24 27 23.1195 27 22.1175 L 27 14.2005 L 26.991 14.2125 Z\"/><path fill=\"#ffffff\" stroke=\"none\" transform=\"matrix(1, 0, 0, 1, 0, 0)\" d=\"M 8.25 16.491 C 6.1785 16.491 4.5 15.822 4.5 14.9955 C 4.5 14.1705 6.1785 13.5 8.25 13.5 C 10.3215 13.5 12 14.1705 12 14.9955 C 12 15.822 10.3215 16.491 8.25 16.491 Z M 21.75 16.491 C 19.6785 16.491 18 15.822 18 14.9955 C 18 14.1705 19.6785 13.5 21.75 13.5 C 23.8215 13.5 25.5 14.1705 25.5 14.9955 C 25.5 15.822 23.8215 16.491 21.75 16.491 Z\"/><path fill=\"#424242\" stroke=\"none\" transform=\"matrix(1, 0, 0, 1, 0, 0)\" d=\"M 16.8363 8.79768 L 16.8363 8.79768 L 14.6631 10.9795 L 15.5441 11.8605 L 19.2486 8.1572 L 15.5777 4.5 L 14.6955 5.38221 L 16.8587 7.56282 L 10.5 7.56282 L 10.5 8.79768 L 16.8363 8.79768\"/></g><g transform=\"matrix(1, 0, 0, 1, 50, 21.3295)\"><text style=\"font: 14px Segoe UI\" fill=\"black\" stroke=\"none\" text-anchor=\"start\" transform=\"matrix(1, 0, 0, 1, 0, 0)\" x=\"0\" y=\"12.2558\">dataflow1</text></g></g></g><path fill=\"transparent\" stroke=\"none\" transform=\"matrix(1, 0, 0, 1, 0.5, 0.5)\" d=\"M 2 0 L 191 0 C 191.895 0 193 1.10457 193 2 L 193 81 C 193 81.8954 191.895 83 191 83 L 2 83 C 1.10457 83 0 81.8954 0 81 L 0 2 C 0 1.10457 1.10457 0 2 0 Z\"/><path fill=\"none\" stroke=\"#c8c8c8\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\" stroke-miterlimit=\"10\" stroke-width=\"1\" transform=\"matrix(1, 0, 0, 1, 0.5, 0.5)\" d=\"M 2 0 L 191 0 C 191.895 0 193 1.10457 193 2 L 193 81 C 193 81.8954 191.895 83 191 83 L 2 83 C 1.10457 83 0 81.8954 0 81 L 0 2 C 0 1.10457 1.10457 0 2 0 Z\"/></g></g></g><g transform=\"matrix(1, 0, 0, 1, 194, 1)\"><g transform=\"matrix(1, 0, 0, 1, 0, 34)\"><g transform=\"matrix(1, 0, 0, 1, 0, 0)\"><path fill=\"#488e50\" stroke=\"none\" transform=\"matrix(1, 0, 0, 1, 0, 1)\" d=\"M 0 0 L 9 0 L 9 12 L 0 12 Z\"/></g></g></g></g></g></g><clipPath id=\"mainClip83682\"><rect x=\"0\" y=\"0\" width=\"400\" height=\"240\"/></clipPath><clipPath id=\"CLIP83683\"><path transform=\"matrix(1, 0, 0, 1, 0, 0)\" d=\"M 5 6.5 L 192.4 6.5 L 192.4 25 L 5 25 Z\"/></clipPath></svg>",
+	"icons": [
+		"ExecuteDataFlow",
+		"DelimitedText",
+		"DelimitedText"
+	],
+	"requires": {
+		"linkedservices": {
+			"DataFlowblobstorage": {
+				"supportTypes": [
+					"AzureBlobStorage"
+				]
+			}
+		}
+	},
+	"author": "sudhiraw@microsoft.com",
+	"annotations": [],
+	"services": [],
+	"categories": []
+}
