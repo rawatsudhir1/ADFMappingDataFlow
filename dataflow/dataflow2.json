@@ -1,0 +1,71 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Athlete_Events",
+						"type": "DatasetReference"
+					},
+					"name": "AthleteDS"
+				},
+				{
+					"dataset": {
+						"referenceName": "NOCRegions",
+						"type": "DatasetReference"
+					},
+					"name": "RegionDS"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "BadDataOutput",
+						"type": "DatasetReference"
+					},
+					"name": "StoreBadData"
+				},
+				{
+					"dataset": {
+						"referenceName": "GoodDataOutput",
+						"type": "DatasetReference"
+					},
+					"name": "Insights"
+				},
+				{
+					"dataset": {
+						"referenceName": "GoodDataOutput",
+						"type": "DatasetReference"
+					},
+					"name": "Insight2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SortRegionDS"
+				},
+				{
+					"name": "ConditionalSplit1"
+				},
+				{
+					"name": "SortAthleteDS"
+				},
+				{
+					"name": "JoinDatasets"
+				},
+				{
+					"name": "AggRegionSportMedal"
+				},
+				{
+					"name": "OnlyMedalRecords"
+				},
+				{
+					"name": "AggYearRegionMedal"
+				}
+			],
+			"script": "\n\nsource(output(\n\t\tID as string,\n\t\tName as string,\n\t\tSex as string,\n\t\tAge as string,\n\t\tHeight as string,\n\t\tWeight as string,\n\t\tTeam as string,\n\t\tNOC as string,\n\t\tGames as string,\n\t\tYear as string,\n\t\tSeason as string,\n\t\tCity as string,\n\t\tSport as string,\n\t\tEvent as string,\n\t\tMedal as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> AthleteDS\nsource(output(\n\t\tNOC as string,\n\t\tregion as string,\n\t\tnotes as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> RegionDS\nRegionDS sort(asc(NOC, true)) ~> SortRegionDS\nAthleteDS split(toInteger(Age)>0 && toInteger(Height)>0 && toInteger(Weight)>0,\n\tdisjoint: false) ~> ConditionalSplit1@(GoodData, BadData)\nConditionalSplit1@GoodData sort(asc(NOC, true)) ~> SortAthleteDS\nSortAthleteDS, SortRegionDS join(ConditionalSplit1@GoodData@NOC == RegionDS@NOC,\n\tjoinType:'left',\n\tbroadcast: 'none')~> JoinDatasets\nJoinDatasets aggregate(groupBy(region,\n\t\tSport,\n\t\tMedal),\n\tID = count(ID)) ~> AggRegionSportMedal\nAggRegionSportMedal filter(Medal!='NA') ~> OnlyMedalRecords\nJoinDatasets aggregate(groupBy(Year,\n\t\tregion,\n\t\tMedal),\n\tID = count(ID)) ~> AggYearRegionMedal\nConditionalSplit1@BadData sink(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> StoreBadData\nOnlyMedalRecords sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['RegionSportMedal.csv'],\n\tpartitionBy('hash', 1)) ~> Insights\nAggYearRegionMedal sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['YearRegionMedal.csv'],\n\tpartitionBy('hash', 1)) ~> Insight2"
+		}
+	}
+}
